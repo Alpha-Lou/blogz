@@ -20,8 +20,10 @@ class BlogHandler(webapp2.RequestHandler):
             The user parameter will be a User object.
         """
 
-        # TODO - filter the query so that only posts by the given user
-        return None
+        query = Post.all().filter('author =', user.key()).order('-created')
+        return [a for a in query]
+######### TODO - filter the query so that only posts by the given user
+
 
     def get_user_by_name(self, username):
         """ Get a user object from the db, based on their username """
@@ -107,7 +109,9 @@ class BlogIndexHandler(BlogHandler):
         # render the page
         t = jinja_env.get_template("blog.html")
         response = t.render(
+
                     posts=posts,
+                    User=User,
                     page=page,
                     page_size=self.page_size,
                     prev_page=prev_page,
@@ -151,11 +155,11 @@ class ViewPostHandler(BlogHandler):
 
     def get(self, id):
         """ Render a page with post determined by the id (via the URL/permalink) """
-
+        
         post = Post.get_by_id(int(id))
         if post:
             t = jinja_env.get_template("post.html")
-            response = t.render(post=post)
+            response = t.render(post=post, User=User)
         else:
             error = "there is no post with id %s" % id
             t = jinja_env.get_template("404.html")
@@ -258,7 +262,7 @@ class SignupHandler(BlogHandler):
 
 class LoginHandler(BlogHandler):
 
-    # TODO - The login code here is mostly set up for you, but there isn't a template to log in
+########## TODO - The login code here is mostly set up for you, but there isn't a template to log in
 
     def render_login_form(self, error=""):
         """ Render the login form with or without an error, based on parameters """

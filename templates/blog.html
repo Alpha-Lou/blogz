@@ -8,6 +8,9 @@
 
 <h2><a href="/blog/{{ post.key().id() }}">{{ post.title }}</a></h2>
 <p>{{ post.body }}</p>
+
+<h2><a href="/blog/{{ User.get(post.author.key()).username }}">{{User.get(post.author.key()).username}}</a></h2>
+
 <!-- TODO add author w/ link to author's blog page -->
 
 {% endfor %}

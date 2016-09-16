@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Login</title>
+        <link rel="stylesheet" href="/css/normalize.css">
+        <link rel="stylesheet" href="/css/styles.css">
+    </head>
+
+    <h1 style="text-align: center">LOG IN</h1>
+    <body>
+
+<form method="post">
+    <table>
+        <tr>
+            <td><label for="username">Username</label></td>
+
+            <td>
+                <input name="username" type="text" value="{{ username }}">
+
+            </td>
+        </tr>
+
+        <tr>
+            <td><label for="password">Password</label></td>
+
+
+            <td>
+                <input name="password" type="password">
+            </td>
+        </tr>
+
+    </table>
+    <div style="color: red">{{error}}</div>
+
+    <input type="submit">
+</form>
+
+
+</body>
+
+</html>
